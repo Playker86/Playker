@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#050a18" />
-  <title>PlayStation Plus</title>
+  <title>PlayStation Plus — подписки по регионам</title>
 
   <style>
     :root {
       --bg: #030712;
       --panel: rgba(10, 17, 35, 0.82);
-      --panel-strong: rgba(13, 23, 48, 0.94);
       --line: rgba(255,255,255,0.11);
       --text: #ffffff;
       --muted: #a7b1c7;
@@ -25,6 +24,9 @@
 
       --premium-1: #f6d59a;
       --premium-2: #aa7840;
+
+      --usa-1: #ffdf8d;
+      --usa-2: #b47a36;
 
       --shadow: 0 24px 80px rgba(0,0,0,.45);
     }
@@ -84,14 +86,14 @@
     .s4 { bottom: 4%; right: 7%; font-size: 132px; transform: rotate(-8deg); }
 
     .page {
-      width: min(1200px, calc(100% - 28px));
+      width: min(1220px, calc(100% - 28px));
       margin: 0 auto;
       padding: 26px 0 56px;
     }
 
     .hero {
       position: relative;
-      min-height: 430px;
+      min-height: 400px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -118,18 +120,6 @@
       box-shadow:
         0 0 0 45px rgba(255,255,255,.025),
         0 0 0 90px rgba(255,255,255,.018);
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -50px -80px auto;
-      width: 430px;
-      height: 230px;
-      background:
-        linear-gradient(135deg, transparent 0 40%, rgba(255,255,255,.05) 40% 42%, transparent 42%),
-        linear-gradient(45deg, transparent 0 45%, rgba(255,255,255,.04) 45% 47%, transparent 47%);
-      transform: rotate(-8deg);
     }
 
     .ps-brand {
@@ -179,68 +169,95 @@
     h1 {
       position: relative;
       z-index: 1;
-      max-width: 780px;
+      max-width: 850px;
       margin: 0;
-      font-size: clamp(46px, 7vw, 86px);
-      line-height: .96;
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: .98;
       letter-spacing: -.055em;
     }
 
     .hero-text {
       position: relative;
       z-index: 1;
-      max-width: 700px;
+      max-width: 760px;
       margin: 24px 0 0;
       color: #d6e3f5;
       font-size: clamp(17px, 2vw, 21px);
       line-height: 1.65;
     }
 
-    .hero-note {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      margin-top: 26px;
-      padding: 11px 15px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      color: #dcecff;
-      background: rgba(255,255,255,.065);
-      font-size: 14px;
-      font-weight: 700;
+    .region-section {
+      margin-top: 30px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(5, 11, 26, .76);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
 
-    .hero-note::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #35d07f;
-      box-shadow: 0 0 14px rgba(53,208,127,.75);
+    .region-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .region-header h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      letter-spacing: -.045em;
+    }
+
+    .region-header p {
+      max-width: 650px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .flags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,.055);
+      color: #e7eef9;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .plans {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      margin-top: 28px;
+      gap: 20px;
+    }
+
+    .plans.single {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .tier {
       position: relative;
-      min-height: 610px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 26px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
         var(--panel);
-      box-shadow: var(--shadow);
       isolation: isolate;
     }
 
@@ -282,19 +299,25 @@
       --glow: rgba(170,120,64,.28);
     }
 
+    .usa-premium {
+      --accent-1: var(--usa-1);
+      --accent-2: var(--usa-2);
+      --glow: rgba(180,122,54,.32);
+    }
+
     .tier-header {
-      padding: 30px 26px 22px;
+      padding: 28px 24px 20px;
       text-align: center;
     }
 
     .tier-logo {
       position: relative;
-      width: 118px;
-      height: 118px;
+      width: 112px;
+      height: 112px;
       display: grid;
       place-items: center;
-      margin: 0 auto 22px;
-      border-radius: 31px;
+      margin: 0 auto 20px;
+      border-radius: 30px;
       border: 1px solid rgba(255,255,255,.18);
       background:
         linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.025));
@@ -313,7 +336,7 @@
 
     .tier-logo-main {
       position: relative;
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 900;
       letter-spacing: -7px;
       font-style: italic;
@@ -326,9 +349,9 @@
 
     .tier-logo-plus {
       position: absolute;
-      right: 22px;
-      bottom: 20px;
-      font-size: 27px;
+      right: 20px;
+      bottom: 19px;
+      font-size: 26px;
       font-weight: 900;
       color: var(--accent-1);
       text-shadow: 0 4px 12px rgba(0,0,0,.28);
@@ -344,14 +367,14 @@
       text-transform: uppercase;
     }
 
-    .tier h2 {
+    .tier h3 {
       margin: 0;
-      font-size: 31px;
+      font-size: 30px;
       letter-spacing: -.035em;
     }
 
     .tier-description {
-      min-height: 48px;
+      min-height: 44px;
       margin: 12px auto 0;
       color: var(--muted);
       font-size: 14px;
@@ -361,20 +384,24 @@
     .duration-list {
       display: grid;
       gap: 12px;
-      padding: 0 18px 20px;
+      padding: 0 16px 18px;
       margin-top: auto;
     }
 
+    .plans.single .duration-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 0;
+    }
+
     .duration-card {
-      position: relative;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
       gap: 16px;
-      min-height: 102px;
-      padding: 17px 16px 17px 18px;
+      min-height: 98px;
+      padding: 16px;
       border: 1px solid rgba(255,255,255,.095);
-      border-radius: 18px;
+      border-radius: 17px;
       background:
         linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
@@ -388,7 +415,7 @@
     }
 
     .duration-name {
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 900;
       letter-spacing: -.035em;
     }
@@ -403,7 +430,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 116px;
+      min-width: 112px;
       padding: 13px 15px;
       border-radius: 12px;
       color: #07101d;
@@ -445,11 +472,8 @@
         grid-template-columns: 1fr;
       }
 
-      .tier {
-        min-height: auto;
-      }
-
-      .duration-list {
+      .duration-list,
+      .plans.single .duration-list {
         grid-template-columns: repeat(3, minmax(0,1fr));
         margin-top: 0;
       }
@@ -463,38 +487,41 @@
       }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .page {
-        width: min(100% - 18px, 1200px);
+        width: min(100% - 18px, 1220px);
         padding-top: 10px;
       }
 
       .hero {
-        min-height: 390px;
+        min-height: 380px;
         padding: 28px 22px 32px;
         border-radius: 23px;
       }
 
-      .plans {
-        gap: 16px;
-      }
-
-      .tier {
+      .region-section {
+        padding: 18px;
         border-radius: 22px;
       }
 
-      .duration-list {
-        grid-template-columns: 1fr;
+      .region-header {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .tier-description {
-        min-height: auto;
+      .flags {
+        justify-content: flex-start;
+      }
+
+      .duration-list,
+      .plans.single .duration-list {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 440px) {
       h1 {
-        font-size: 43px;
+        font-size: 42px;
       }
 
       .hero-text {
@@ -531,168 +558,218 @@
         </div>
       </div>
 
-      <h1>Выберите свой уровень PlayStation Plus</h1>
+      <h1>Подписки PlayStation Plus по регионам</h1>
 
       <p class="hero-text">
-        Essential, Extra или Deluxe / Premium — выберите подходящий уровень и срок подписки.
-        Ссылка откроется для того региона PlayStation Store, в котором выполнен вход в аккаунт.
+        Выберите региональную группу, нужный уровень подписки и срок.
+        Для США используется отдельный набор ссылок PS Plus Premium.
       </p>
-
-      <div class="hero-note">Ссылки подходят для разных регионов PS Store</div>
     </section>
 
-    <section class="plans">
-      <article class="tier essential">
-        <div class="tier-header">
-          <div class="tier-logo" aria-label="PlayStation Plus Essential">
-            <div class="tier-logo-main">PS</div>
-            <div class="tier-logo-plus">+</div>
-          </div>
-          <span class="tier-badge">PlayStation Plus</span>
-          <h2>Essential</h2>
-          <p class="tier-description">
-            Основной уровень PlayStation Plus.
+    <section class="region-section">
+      <div class="region-header">
+        <div>
+          <h2>Украина, Турция, Великобритания и Польша</h2>
+          <p>
+            Для этих регионов используются общие ссылки на уровни Essential, Extra и Deluxe / Premium.
           </p>
         </div>
 
-        <div class="duration-list">
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">1 месяц</div>
-              <div class="duration-sub">PS Plus Essential</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T01M0000000-E004">
-              Выбрать
-            </a>
-          </div>
-
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">3 месяца</div>
-              <div class="duration-sub">PS Plus Essential</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T03M0000000-E004">
-              Выбрать
-            </a>
-          </div>
-
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">12 месяцев</div>
-              <div class="duration-sub">PS Plus Essential</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T12M0000000-E005">
-              Выбрать
-            </a>
-          </div>
+        <div class="flags">
+          <span class="flag">🇺🇦 Украина</span>
+          <span class="flag">🇹🇷 Турция</span>
+          <span class="flag">🇬🇧 Великобритания</span>
+          <span class="flag">🇵🇱 Польша</span>
         </div>
-      </article>
+      </div>
 
-      <article class="tier extra">
-        <div class="tier-header">
-          <div class="tier-logo" aria-label="PlayStation Plus Extra">
-            <div class="tier-logo-main">PS</div>
-            <div class="tier-logo-plus">+</div>
+      <div class="plans">
+        <article class="tier essential">
+          <div class="tier-header">
+            <div class="tier-logo" aria-label="PlayStation Plus Essential">
+              <div class="tier-logo-main">PS</div>
+              <div class="tier-logo-plus">+</div>
+            </div>
+            <span class="tier-badge">PlayStation Plus</span>
+            <h3>Essential</h3>
+            <p class="tier-description">Основной уровень PlayStation Plus.</p>
           </div>
-          <span class="tier-badge">PlayStation Plus</span>
-          <h2>Extra</h2>
-          <p class="tier-description">
-            Расширенный уровень с каталогом игр.
+
+          <div class="duration-list">
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">1 месяц</div>
+                <div class="duration-sub">PS Plus Essential</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T01M0000000-E004">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">3 месяца</div>
+                <div class="duration-sub">PS Plus Essential</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T03M0000000-E004">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">12 месяцев</div>
+                <div class="duration-sub">PS Plus Essential</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS1T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS1T12M0000000-E005">Выбрать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tier extra">
+          <div class="tier-header">
+            <div class="tier-logo" aria-label="PlayStation Plus Extra">
+              <div class="tier-logo-main">PS</div>
+              <div class="tier-logo-plus">+</div>
+            </div>
+            <span class="tier-badge">PlayStation Plus</span>
+            <h3>Extra</h3>
+            <p class="tier-description">Расширенный уровень с каталогом игр.</p>
+          </div>
+
+          <div class="duration-list">
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">1 месяц</div>
+                <div class="duration-sub">PS Plus Extra</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T01M0000000-E004">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">3 месяца</div>
+                <div class="duration-sub">PS Plus Extra</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T03M0000000-E004">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">12 месяцев</div>
+                <div class="duration-sub">PS Plus Extra</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T12M0000000-E005">Выбрать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tier premium">
+          <div class="tier-header">
+            <div class="tier-logo" aria-label="PlayStation Plus Deluxe Premium">
+              <div class="tier-logo-main">PS</div>
+              <div class="tier-logo-plus">+</div>
+            </div>
+            <span class="tier-badge">PlayStation Plus</span>
+            <h3>Deluxe / Premium</h3>
+            <p class="tier-description">Максимальный уровень PlayStation Plus.</p>
+          </div>
+
+          <div class="duration-list">
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">1 месяц</div>
+                <div class="duration-sub">PS Plus Deluxe / Premium</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T01M0000000-E007">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">3 месяца</div>
+                <div class="duration-sub">PS Plus Deluxe / Premium</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T03M0000000-E008">Выбрать</a>
+            </div>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">12 месяцев</div>
+                <div class="duration-sub">PS Plus Deluxe / Premium</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T12M0000000-E00B">Выбрать</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="region-section">
+      <div class="region-header">
+        <div>
+          <h2>PS Plus США</h2>
+          <p>
+            Для американского региона используются отдельные ссылки PS Plus Premium.
           </p>
         </div>
 
-        <div class="duration-list">
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">1 месяц</div>
-              <div class="duration-sub">PS Plus Extra</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T01M0000000-E004">
-              Выбрать
-            </a>
-          </div>
-
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">3 месяца</div>
-              <div class="duration-sub">PS Plus Extra</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T03M0000000-E004">
-              Выбрать
-            </a>
-          </div>
-
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">12 месяцев</div>
-              <div class="duration-sub">PS Plus Extra</div>
-            </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS2T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS2T12M0000000-E005">
-              Выбрать
-            </a>
-          </div>
+        <div class="flags">
+          <span class="flag">🇺🇸 США</span>
         </div>
-      </article>
+      </div>
 
-      <article class="tier premium">
-        <div class="tier-header">
-          <div class="tier-logo" aria-label="PlayStation Plus Deluxe Premium">
-            <div class="tier-logo-main">PS</div>
-            <div class="tier-logo-plus">+</div>
-          </div>
-          <span class="tier-badge">PlayStation Plus</span>
-          <h2>Deluxe / Premium</h2>
-          <p class="tier-description">
-            Максимальный уровень PlayStation Plus.
-          </p>
-        </div>
-
-        <div class="duration-list">
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">1 месяц</div>
-              <div class="duration-sub">PS Plus Deluxe / Premium</div>
+      <div class="plans single">
+        <article class="tier usa-premium">
+          <div class="tier-header">
+            <div class="tier-logo" aria-label="PlayStation Plus Premium USA">
+              <div class="tier-logo-main">PS</div>
+              <div class="tier-logo-plus">+</div>
             </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T01M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T01M0000000-E007">
-              Выбрать
-            </a>
+            <span class="tier-badge">PlayStation Plus USA</span>
+            <h3>Premium</h3>
+            <p class="tier-description">Подписка PlayStation Plus Premium для региона США.</p>
           </div>
 
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">3 месяца</div>
-              <div class="duration-sub">PS Plus Deluxe / Premium</div>
+          <div class="duration-list">
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">1 месяц</div>
+                <div class="duration-sub">PS Plus Premium USA</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/en-us/product/IP9101-PPSA06916_00-PLUS3T01M0000000/?cartAction=add&amp;skuId=IP9101-PPSA06916_00-PLUS3T01M0000000-U007">Выбрать</a>
             </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T03M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T03M0000000-E008">
-              Выбрать
-            </a>
-          </div>
 
-          <div class="duration-card">
-            <div>
-              <div class="duration-name">12 месяцев</div>
-              <div class="duration-sub">PS Plus Deluxe / Premium</div>
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">3 месяца</div>
+                <div class="duration-sub">PS Plus Premium USA</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/en-us/product/IP9101-PPSA06916_00-PLUS3T03M0000000/?cartAction=add&amp;skuId=IP9101-PPSA06916_00-PLUS3T03M0000000-U008">Выбрать</a>
             </div>
-            <a class="buy-btn" target="_blank" rel="noopener noreferrer"
-               href="https://store.playstation.com/ru-ua/product/IP9102-PPSA06902_00-PLUS3T12M0000000/?cartAction=add&amp;skuId=IP9102-PPSA06902_00-PLUS3T12M0000000-E00B">
-              Выбрать
-            </a>
+
+            <div class="duration-card">
+              <div>
+                <div class="duration-name">12 месяцев</div>
+                <div class="duration-sub">PS Plus Premium USA</div>
+              </div>
+              <a class="buy-btn" target="_blank" rel="noopener noreferrer"
+                 href="https://store.playstation.com/en-us/product/IP9101-PPSA06916_00-PLUS3T12M0000000/?cartAction=add&amp;skuId=IP9101-PPSA06916_00-PLUS3T12M0000000-U008">Выбрать</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
     <footer class="footer">
       <strong>Важно:</strong> перед переходом войдите в нужный аккаунт PlayStation Network.
-      PlayStation Store автоматически покажет вариант подписки для региона этого аккаунта.
+      Для США используйте отдельный блок PS Plus Premium.
     </footer>
   </main>
 </body>
